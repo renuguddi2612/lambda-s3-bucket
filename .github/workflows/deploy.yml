@@ -21,11 +21,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Zip Lambda
+    - name: Zip Lambda function
       run: zip function.zip lambda_function.py
 
-    - name: Deploy Lambda
+    - name: Deploy to Lambda
       run: |
         aws lambda update-function-code \
-        --function-name renu_create-s3-bucket \
+        --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
         --zip-file fileb://function.zip
